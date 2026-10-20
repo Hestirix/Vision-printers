@@ -1,4 +1,4 @@
-import { readFile, access } from 'node:fs/promises';
+import { readFile, access, readdir } from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import { company } from '../src/config.mjs';
 const pages=['index.html','services.html','equipment.html','about.html','contact.html','quote.html'];
@@ -13,7 +13,9 @@ for(const page of pages){
   if(hash) assert((await readFile('dist/'+target,'utf8')).includes(`id="${hash}"`),`${page}: missing anchor ${url}`);
  }
  if(page==='contact.html'||page==='quote.html'){
-  assert(html.includes('submissions are not active'));
+  assert(html.includes('Submissions are not active until the backend is available'));
+  assert(html.includes('data-inquiry="'+(page==='quote.html'?'quote':'contact')+'"'));
+  assert(html.includes('type="button" class="button" disabled'));
   assert(!html.includes('action='));
   assert(html.includes(`Future inquiries will be delivered to ${company.formRecipient}.`));
   const ids=new Set([...html.matchAll(/id="([^"]+)"/g)].map(m=>m[1]));
@@ -33,3 +35,11 @@ for(const page of pages){
 }
 console.log('PASS: configured telephone, email, WhatsApp and map destinations; sole future form recipient.');
 console.log('PASS: six pages, local links/assets, anchor destinations, headings, form disclosures and label targets.');
+const core=await readFile('backend/src/core.php','utf8');
+assert(core.includes(`const RECIPIENT = '${company.formRecipient}';`),'Backend recipient differs from frontend');
+assert.deepEqual((await readdir('dist/api')).sort(),['contact.php','quote.php','session.php']);
+for(const forbidden of ['backend','vendor','config.local.php','.env']) {
+ let exists=false; try {await access('dist/'+forbidden);exists=true;} catch {}
+ assert(!exists,`Private path leaked into build: ${forbidden}`);
+}
+console.log('PASS: backend recipient consistency and public/private build separation.');

@@ -1,5 +1,6 @@
 /* Shared visual refinement. Content, page structure and base responsive rules
    remain in the original generator and stylesheet. */
+.form-trap{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
 :root{--pale:#eef4f9;--line:#dde6ed;--muted:#596572;--radius:28px;--shadow:0 16px 45px rgba(29,54,75,.07)}
 body{background:#fbfcfd;letter-spacing:-.012em}
 h1,h2,h3{text-wrap:balance;font-weight:700}

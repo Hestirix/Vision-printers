@@ -1,6 +1,6 @@
 # Vision Printers & Graphic Suppliers
 
-Private local frontend prototype prepared under Lenga Systems. No deployment, SMTP, backend, analytics or external form service is configured.
+Private local prototype prepared under Lenga Systems. A PHP/PHPMailer backend is implemented but disabled by default. No production SMTP, hosting, analytics or external form service is configured.
 
 ## Built by Dennis Garfield from Lenga
 
@@ -37,11 +37,11 @@ The build generates six static HTML pages and assets in `dist/`: Home, Services,
 
 Photo `(1)` is the press hero; `(5)` illustrates printing; `(2)` shows embroidery equipment; `(4)` shows embroidery in progress; `(11)` supports equipment storytelling. The nearly duplicate `(8)` and supplied stock files are unused. Stock licensing has not been confirmed. Service illustrations are CSS artwork, explicitly labelled, and are not completed client projects. Supplied workshop photos are not presented as client endorsements.
 
-## Forms and next phase
+## Form backend
 
-Both forms explicitly disclose inactive submissions. The preview button performs browser validation and displays an informational status, never a success confirmation. No request, storage or upload occurs. The file picker accepts PDF/JPG/PNG references up to 10 MB for local interface review only. Required fields have labels and native validation. In this frontend-only phase JavaScript intercepts submission; do not enable live forms until a secure backend exists.
+See [backend/README.md](backend/README.md) for PHP/Composer installation, safe localhost mock testing, endpoints, security controls, private configuration and the future hosting checklist. The Node preview cannot execute PHP and keeps submissions disabled. Use the documented PHP server on port 8080 for functional form tests.
 
-Future integration: PHP + PHPMailer on Hostinger, delivering both forms to `sales@visionprintersmw.com`. Add server-side validation, CSRF and spam controls, strict attachment validation, SMTP secrets outside public files and appropriate privacy wording. Client checks are not a security boundary. Hosting and email configuration are intentionally deferred.
+The frontend enables a form only after a valid backend session response. Mock mode prepares messages in memory without sending them; SMTP mode requires explicit private configuration. Both business inquiries go only to `sales@visionprintersmw.com`. Customer acknowledgments are prepared separately and require explicit production activation. No production credentials have been added.
 
 ## Content requiring confirmation
 

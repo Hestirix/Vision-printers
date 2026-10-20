@@ -1,0 +1,14 @@
+{
+  "name": "lenga/vision-printers-forms",
+  "description": "Private form backend for Vision Printers",
+  "type": "project",
+  "require": {
+    "php": "^8.2",
+    "ext-fileinfo": "*",
+    "ext-mbstring": "*",
+    "ext-openssl": "*",
+    "ext-session": "*",
+    "phpmailer/phpmailer": "^7.0"
+  },
+  "config": { "allow-plugins": {}, "sort-packages": true }
+}

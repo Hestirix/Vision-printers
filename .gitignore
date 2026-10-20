@@ -5,3 +5,7 @@ dist/
 .env
 .env.*
 !.env.example
+backend/vendor/
+backend/config.local.php
+backend/var/
+.tools/
